@@ -35,13 +35,14 @@ function printData(data) {
     console.log(header);
 }
 
+//delete h2 : (${data[0].nicKname}):
 async function getCharacter(name) {
   if(name !== 'please select'){
     const response = await fetch(`${api}?name=${name}`);
     const data = await response.json();
     console.log(data);
     content.innerHTML = 
-    ` <h2>${data[0].name} (${data[0].nicKname})</h2>
+    ` <h2>${data[0].name} </h2>
       <h4>${data[0].portrayed}</h4>
       <img src="${data[0].img}" width="300px">
     `
