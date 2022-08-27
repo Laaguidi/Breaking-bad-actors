@@ -5,7 +5,7 @@ After reading API documantation the idea of this small app is to select any acto
 And display the image .
 
 ## What I Used For This Website:
-1- HTML.
-2- CSS.
-3- Javascript.
-4- Bootstrap.
+1- HTML.<br/>
+2- CSS.<br/>
+3- Javascript.<br/>
+4- Bootstrap.<br/>
