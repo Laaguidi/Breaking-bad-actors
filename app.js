@@ -6,52 +6,49 @@
 // .then((data) => {
 //     console.log(data);
 // })
-const api = "https://www.breakingbadapi.com/api/characters/"
 
-async function getData() {
-  const response = await fetch(api);
-  const data = await response.json();
-  printData(data);
+const api = "https://www.breakingbadapi.com/api/characters";
 
-// const print = data.map(m => m.name)
-//   console.log(print);
-
-//   data.map(function(actor) {
-//        console.log(actor.name);
-//   })
-
-//   document.querySelector("#content h1").innerHTML = data[0].name;
-//   document.querySelector("#content h4").innerHTML = data[0].birthday;
-//   document.querySelector("#content img").src = data[0].img;
-
-//   document.querySelector("#actor").innerHTML = 
-//   `
-//     <select name="" id="">
-//         ${
-//             data.map(actor => `<option>${actor.name}</option>`)
-//         }
-//     </select>
+async function getdata() {
+   try {
+    const response = await fetch(api)
+    const data = await response.json();
+    console.log(data)
+    //const v = Object.entries(data).map(m => m)
+    //console.log(v)
+    //data.map(m => m.name)
+    printData(data)
+   } catch(e){
+       console.log("Error:" ,e.message)
+   }
    
-//   `
-  
 }
-getData();
 
 function printData(data) {
-     const header = document.querySelector("#header");
-     const content = document.querySelector("#content");
-
-    //  header.innerHTML += `
-    //                       <select class="form-control>
-    //                         <option>PPlease select</option>
-    //                         ${data.map(character => `<option>${character.name}</option>`)}
-    //                       </select>`
+    const header = document.querySelector("#header")
+    const content = document.querySelector("#content")
     header.innerHTML += 
-    `<select class="form-control" onchange="getCharacter(this.value)>
+    `<select class="form-control" onchange="getCharacter(this.value)">
        <option>Please select</option>
        ${data.map(character => `<option>${character.name}</option>`)}
     </select>`
-                          
+    console.log(header);
 }
-printData();
+
+async function getCharacter(name) {
+  if(name !== 'please select'){
+    const response = await fetch(`${api}?name=${name}`);
+    const data = await response.json();
+    console.log(data);
+    content.innerHTML = 
+    ` <h2>${data[0].name} (${data[0].nicKname})</h2>
+      <h4>${data[0].portrayed}</h4>
+      <img src="${data[0].img}" width="300px">
+    `
+  }
+  
+}
+
+getdata();
+  
 
